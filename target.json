@@ -1,0 +1,18 @@
+{
+    "include": [
+        {
+            "keyboard": "kissbd",
+            "keymap": "vial",
+            "target": "uf2",
+            "flags": "EXTRAFLAGS=-DINIT_EE_HANDS_LEFT",
+            "name": "kissbd_vial_left"
+        },
+        {
+            "keyboard": "kissbd",
+            "keymap": "vial",
+            "target": "uf2",
+            "flags": "EXTRAFLAGS=-DINIT_EE_HANDS_RIGHT",
+            "name": "kissbd_vial_right"
+        }
+    ]
+}
