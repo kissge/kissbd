@@ -6,7 +6,17 @@
 #include "qmk_settings.h"
 #endif
 
-/* USER INCLUDE BEGIN *//* USER INCLUDE END */
+/* USER INCLUDE BEGIN */
+enum kissbd_keycode {
+    IME = QK_KB_0,
+    TAB_OPEN,
+    TAB_CLOSE,
+    TAB_PREV,
+    TAB_NEXT,
+    TAB_REOPEN,
+    WIN_CLOSE,
+};
+/* USER INCLUDE END */
 
 /* GENERATED CODE BEGIN */
 
@@ -17,7 +27,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                    KC_A,            KC_S,            KC_D,            KC_F,
                    KC_G,      KC_MS_BTN3,   KC_LEFT_SHIFT,            KC_Z,
                    KC_X,            KC_C,            KC_V,            KC_B,
-              KC_ESCAPE,         QK_KB_0,     KC_LEFT_GUI,     KC_LEFT_ALT,
+              KC_ESCAPE,             IME,     KC_LEFT_GUI,     KC_LEFT_ALT,
                   MO(1),        KC_ENTER,        KC_SPACE,        KC_GRAVE,
                    KC_Y,            KC_U,            KC_I,            KC_O,
                    KC_P,        KC_MINUS,        KC_EQUAL,      KC_MS_BTN2,
@@ -30,8 +40,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [1] = LAYOUT(
          KC_TRANSPARENT,            KC_1,            KC_2,            KC_3,
                    KC_4,            KC_5,  KC_TRANSPARENT,  KC_TRANSPARENT,
-                QK_KB_1,         QK_KB_2,         QK_KB_3,         QK_KB_4,
-                QK_KB_5,  KC_TRANSPARENT,  KC_TRANSPARENT,         QK_KB_6,
+               TAB_OPEN,       TAB_CLOSE,        TAB_PREV,        TAB_NEXT,
+              WIN_CLOSE,  KC_TRANSPARENT,  KC_TRANSPARENT,      TAB_REOPEN,
          KC_TRANSPARENT,   KC_AUDIO_MUTE, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP,
          KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
          KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,  KC_TRANSPARENT,
@@ -98,7 +108,7 @@ const vial_combo_entry_t PROGMEM default_combo_entries[] = {
 
 // Macro buffer
 const uint8_t PROGMEM default_macro_buffer[] = {
-    
+
 };
 
 // Key Override definitions
@@ -189,7 +199,7 @@ void __wrap_dynamic_keymap_reset(void) {
     #endif
 
     qmk_settings_init();
-#endif 
+#endif
 
     uint16_t const macro_buffer_size = MIN(sizeof(default_macro_buffer), dynamic_keymap_macro_get_buffer_size());
     dynamic_keymap_macro_set_buffer(0, macro_buffer_size, (uint8_t *)default_macro_buffer);
@@ -198,4 +208,44 @@ void __wrap_dynamic_keymap_reset(void) {
 /* GENERATED CODE END */
 
 
-/* USER CODE BEGIN *//* USER CODE END */
+/* USER CODE BEGIN */
+bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
+    if (!process_record_user(keycode, record)) {
+        return false;
+    }
+
+    if (record->event.pressed) {
+        switch (keycode) {
+            case IME:
+                SEND_STRING(SS_LALT(SS_TAP(X_GRAVE)));
+                return false;
+
+            case TAB_OPEN:
+                SEND_STRING(SS_LCTL(SS_TAP(X_T)));
+                return false;
+
+            case TAB_CLOSE:
+                SEND_STRING(SS_LCTL(SS_TAP(X_W)));
+                return false;
+
+            case TAB_PREV:
+                SEND_STRING(SS_LCTL(SS_TAP(X_PGUP)));
+                return false;
+
+            case TAB_NEXT:
+                SEND_STRING(SS_LCTL(SS_TAP(X_PGDN)));
+                return false;
+
+            case TAB_REOPEN:
+                SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_T))));
+                return false;
+
+            case WIN_CLOSE:
+                SEND_STRING(SS_LALT(SS_TAP(X_F4)));
+                return false;
+        }
+    }
+
+    return true;
+}
+/* USER CODE END */

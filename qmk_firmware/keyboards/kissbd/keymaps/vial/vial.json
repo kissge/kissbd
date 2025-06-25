@@ -294,5 +294,42 @@
                 "7,0\n\n\n0,0"
             ]
         ]
-    }
+    },
+    "customKeycodes": [
+        {
+            "name": "IME",
+            "title": "IME",
+            "shortName": "IME"
+        },
+        {
+            "name": "TAB_OPEN",
+            "title": "TAB_OPEN",
+            "shortName": "TAB_OPEN"
+        },
+        {
+            "name": "TAB_CLOSE",
+            "title": "TAB_CLOSE",
+            "shortName": "TAB_CLOSE"
+        },
+        {
+            "name": "TAB_PREV",
+            "title": "TAB_PREV",
+            "shortName": "TAB_PREV"
+        },
+        {
+            "name": "TAB_NEXT",
+            "title": "TAB_NEXT",
+            "shortName": "TAB_NEXT"
+        },
+        {
+            "name": "TAB_REOPEN",
+            "title": "TAB_REOPEN",
+            "shortName": "TAB_REOPEN"
+        },
+        {
+            "name": "WIN_CLOSE",
+            "title": "WIN_CLOSE",
+            "shortName": "WIN_CLOSE"
+        }
+    ]
 }
