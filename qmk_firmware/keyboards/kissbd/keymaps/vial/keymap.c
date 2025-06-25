@@ -33,7 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                    KC_P,        KC_MINUS,        KC_EQUAL,      KC_MS_BTN2,
                    KC_H,            KC_J,            KC_K,            KC_L,
            KC_SEMICOLON,        KC_QUOTE,    KC_BACKSLASH,            KC_N,
-                   KC_M,        KC_COMMA,        KC_COMMA,        KC_SLASH,
+                   KC_M,        KC_COMMA,          KC_DOT,        KC_SLASH,
         KC_LEFT_BRACKET, KC_RIGHT_BRACKET,           MO(2),    KC_BACKSPACE,
              KC_MS_BTN1
     ),
@@ -108,7 +108,7 @@ const vial_combo_entry_t PROGMEM default_combo_entries[] = {
 
 // Macro buffer
 const uint8_t PROGMEM default_macro_buffer[] = {
-
+    
 };
 
 // Key Override definitions
@@ -199,7 +199,7 @@ void __wrap_dynamic_keymap_reset(void) {
     #endif
 
     qmk_settings_init();
-#endif
+#endif 
 
     uint16_t const macro_buffer_size = MIN(sizeof(default_macro_buffer), dynamic_keymap_macro_get_buffer_size());
     dynamic_keymap_macro_set_buffer(0, macro_buffer_size, (uint8_t *)default_macro_buffer);
