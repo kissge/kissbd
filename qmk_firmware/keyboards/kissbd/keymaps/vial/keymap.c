@@ -259,7 +259,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 report_mouse_t pointing_device_task_kb(report_mouse_t mouse_report) {
     if (is_scroll_mode_enabled) {
         mouse_report.h = mouse_report.x;
-        mouse_report.v = mouse_report.y;
+        mouse_report.v = -mouse_report.y;
     }
     return mouse_report;
 }
