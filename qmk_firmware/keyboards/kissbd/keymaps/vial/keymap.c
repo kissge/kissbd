@@ -108,7 +108,7 @@ const vial_combo_entry_t PROGMEM default_combo_entries[] = {
 
 // Macro buffer
 const uint8_t PROGMEM default_macro_buffer[] = {
-    
+
 };
 
 // Key Override definitions
@@ -199,7 +199,7 @@ void __wrap_dynamic_keymap_reset(void) {
     #endif
 
     qmk_settings_init();
-#endif 
+#endif
 
     uint16_t const macro_buffer_size = MIN(sizeof(default_macro_buffer), dynamic_keymap_macro_get_buffer_size());
     dynamic_keymap_macro_set_buffer(0, macro_buffer_size, (uint8_t *)default_macro_buffer);
@@ -247,5 +247,20 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     }
 
     return true;
+}
+
+bool is_scroll_mode_enabled = false;
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    is_scroll_mode_enabled = get_highest_layer(state) > 0;
+    return state;
+}
+
+report_mouse_t pointing_device_task_kb(report_mouse_t mouse_report) {
+    if (is_scroll_mode_enabled) {
+        mouse_report.h = mouse_report.x;
+        mouse_report.v = mouse_report.y;
+    }
+    return mouse_report;
 }
 /* USER CODE END */
